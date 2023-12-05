@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/codedomain/Grades/GradingSystemTests/GradingSystemTests.csproj": {}
+    "/Users/codedomain/GradingSystem/GradingSystemTests/GradingSystemTests.csproj": {}
   },
   "projects": {
-    "/Users/codedomain/Grades/GradingSystem/GradingSystem.csproj": {
+    "/Users/codedomain/GradingSystem/GradingSystemConsole/GradingSystemConsole.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/codedomain/Grades/GradingSystem/GradingSystem.csproj",
-        "projectName": "GradingSystem",
-        "projectPath": "/Users/codedomain/Grades/GradingSystem/GradingSystem.csproj",
+        "projectUniqueName": "/Users/codedomain/GradingSystem/GradingSystemConsole/GradingSystemConsole.csproj",
+        "projectName": "GradingSystemConsole",
+        "projectPath": "/Users/codedomain/GradingSystem/GradingSystemConsole/GradingSystemConsole.csproj",
         "packagesPath": "/Users/codedomain/.nuget/packages/",
-        "outputPath": "/Users/codedomain/Grades/GradingSystem/obj/",
+        "outputPath": "/Users/codedomain/GradingSystem/GradingSystemConsole/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/codedomain/.nuget/NuGet/NuGet.Config"
@@ -58,14 +58,14 @@
         }
       }
     },
-    "/Users/codedomain/Grades/GradingSystemTests/GradingSystemTests.csproj": {
+    "/Users/codedomain/GradingSystem/GradingSystemTests/GradingSystemTests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/codedomain/Grades/GradingSystemTests/GradingSystemTests.csproj",
+        "projectUniqueName": "/Users/codedomain/GradingSystem/GradingSystemTests/GradingSystemTests.csproj",
         "projectName": "GradingSystemTests",
-        "projectPath": "/Users/codedomain/Grades/GradingSystemTests/GradingSystemTests.csproj",
+        "projectPath": "/Users/codedomain/GradingSystem/GradingSystemTests/GradingSystemTests.csproj",
         "packagesPath": "/Users/codedomain/.nuget/packages/",
-        "outputPath": "/Users/codedomain/Grades/GradingSystemTests/obj/",
+        "outputPath": "/Users/codedomain/GradingSystem/GradingSystemTests/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/codedomain/.nuget/NuGet/NuGet.Config"
@@ -81,8 +81,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "/Users/codedomain/Grades/GradingSystem/GradingSystem.csproj": {
-                "projectPath": "/Users/codedomain/Grades/GradingSystem/GradingSystem.csproj"
+              "/Users/codedomain/GradingSystem/GradingSystemConsole/GradingSystemConsole.csproj": {
+                "projectPath": "/Users/codedomain/GradingSystem/GradingSystemConsole/GradingSystemConsole.csproj"
               }
             }
           }

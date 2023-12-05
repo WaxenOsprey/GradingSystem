@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "DxrbWdHcWOTSqqiS5EcDafwJ10CxZXaYVwhzs+xeFAeh226MPu4PsGPvzq7DqZ1RFwgacWPMOP/vIbqfXXN65g==",
+  "dgSpecHash": "k/nTPLNq+FcWTk3Az6wo0zo7r3NA6cqIIrfZc2uZ/tBAJvD+Y+BzWR+umPkSo6y+XMIYSchXGHM+hk9K1rvoBg==",
   "success": true,
-  "projectFilePath": "/Users/codedomain/Grades/GradingSystemTests/GradingSystemTests.csproj",
+  "projectFilePath": "/Users/codedomain/GradingSystem/GradingSystemTests/GradingSystemTests.csproj",
   "expectedPackageFiles": [
     "/Users/codedomain/.nuget/packages/coverlet.collector/3.2.0/coverlet.collector.3.2.0.nupkg.sha512",
     "/Users/codedomain/.nuget/packages/microsoft.codecoverage/17.7.1/microsoft.codecoverage.17.7.1.nupkg.sha512",

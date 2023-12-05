@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GradingSystem\GradingSystem.csproj" />
+    <ProjectReference Include="..\GradingSystemConsole\GradingSystemConsole.csproj" />
   </ItemGroup>
 
 </Project>

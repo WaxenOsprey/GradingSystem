@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "eUizDnH1DwMxZfY+3NR8QKeXWUYI58i/w5sG8HPzIUkVMtbq+g6OED6gi6adQu0O6mrZNehsqR8ElwCBdEiclQ==",
+  "dgSpecHash": "bw1nzM+zdeEtfJ11EJl5vJ09YGwiLrPsABwAmhJ7hQR9c4PSRCYkYPrCpFRhpmE8kfRUzmbKJ8MTvFV8w7qrmA==",
   "success": true,
-  "projectFilePath": "/Users/codedomain/GradingSystem/GradingSystemConsole/GradingSystem.csproj",
+  "projectFilePath": "/Users/codedomain/GradingSystem/GradingSystemConsole/GradingSystemConsole.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

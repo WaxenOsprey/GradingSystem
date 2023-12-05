@@ -13,9 +13,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/codedomain/GradingSystem/GradingSystemConsole/GradingSystem.csproj",
-      "projectName": "GradingSystem",
-      "projectPath": "/Users/codedomain/GradingSystem/GradingSystemConsole/GradingSystem.csproj",
+      "projectUniqueName": "/Users/codedomain/GradingSystem/GradingSystemConsole/GradingSystemConsole.csproj",
+      "projectName": "GradingSystemConsole",
+      "projectPath": "/Users/codedomain/GradingSystem/GradingSystemConsole/GradingSystemConsole.csproj",
       "packagesPath": "/Users/codedomain/.nuget/packages/",
       "outputPath": "/Users/codedomain/GradingSystem/GradingSystemConsole/obj/",
       "projectStyle": "PackageReference",
