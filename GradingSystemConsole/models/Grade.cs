@@ -1,10 +1,12 @@
-//a class to represent a grade
+using System.ComponentModel.DataAnnotations;
 using GradingSystem.utils;
 
 namespace GradingSystem.models
 {
     public class Grade
     {
+        [Key]
+        public int gradeId { get; set; }
         public int numberGrade { get; set; }
         public string letterGrade { get; set; }
 

@@ -1,9 +1,12 @@
+using System.ComponentModel.DataAnnotations;
 using GradingSystem.utils;
 
 namespace GradingSystem.models
 {
     public class Student
     {
+        [Key]
+        public int studentId { get; set; }
         public string name { get; set; }
         public List<Grade> grades { get; set; }
 

@@ -1,7 +1,11 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace GradingSystem.models
 {
     public class Cohort
     {
+        [Key]
+        public int cohortId { get; set; }
         public string name { get; set; }
 
         public List<Student> students { get; set; }

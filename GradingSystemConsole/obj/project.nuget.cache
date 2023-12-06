@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "opKi2wxcCv5+zJlOvQCb8yZ6pDraOGmADs57eMDCSHd+enNkVTaoZu3TVLjm1dxMUJJIYkzNYP8xnsHxp2WDBA==",
+  "dgSpecHash": "36p/ukkLDuSu0UId6gWwxm6h8bxPCFje2nMs1LyPCSJcnpoJvBfi9dgsYoM9W/LlJSH7LbcPRkoqjofyOW9C+g==",
   "success": true,
   "projectFilePath": "/Users/codedomain/GradingSystem/GradingSystemConsole/GradingSystemConsole.csproj",
   "expectedPackageFiles": [
@@ -19,6 +19,7 @@
     "/Users/codedomain/.nuget/packages/microsoft.entityframeworkcore.relational/8.0.0/microsoft.entityframeworkcore.relational.8.0.0.nupkg.sha512",
     "/Users/codedomain/.nuget/packages/microsoft.entityframeworkcore.sqlite/8.0.0/microsoft.entityframeworkcore.sqlite.8.0.0.nupkg.sha512",
     "/Users/codedomain/.nuget/packages/microsoft.entityframeworkcore.sqlite.core/8.0.0/microsoft.entityframeworkcore.sqlite.core.8.0.0.nupkg.sha512",
+    "/Users/codedomain/.nuget/packages/microsoft.entityframeworkcore.tools/8.0.0/microsoft.entityframeworkcore.tools.8.0.0.nupkg.sha512",
     "/Users/codedomain/.nuget/packages/microsoft.extensions.caching.abstractions/8.0.0/microsoft.extensions.caching.abstractions.8.0.0.nupkg.sha512",
     "/Users/codedomain/.nuget/packages/microsoft.extensions.caching.memory/8.0.0/microsoft.extensions.caching.memory.8.0.0.nupkg.sha512",
     "/Users/codedomain/.nuget/packages/microsoft.extensions.configuration.abstractions/8.0.0/microsoft.extensions.configuration.abstractions.8.0.0.nupkg.sha512",
