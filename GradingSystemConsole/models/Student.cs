@@ -10,6 +10,11 @@ namespace GradingSystem.models
         public string name { get; set; }
         public List<Grade> grades { get; set; }
 
+        // Foreign key
+        public int CohortId { get; set; }
+        // Navigation property
+        public Cohort Cohort { get; set; }
+
         public Student(string name)
         {
             this.name = name;
