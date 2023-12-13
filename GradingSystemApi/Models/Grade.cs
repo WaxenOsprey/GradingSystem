@@ -13,7 +13,7 @@ namespace GradingSystem.models
         // Foreign key
         public int StudentId { get; set; }
         // Navigation property
-        public Student Student { get; set; }
+        public Student? Student { get; set; }
 
 
         public Grade(int numberGrade)

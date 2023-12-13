@@ -6,6 +6,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using GradingSystem.models;
 using GradingSystem.data;
+using Microsoft.OpenApi.Models;
+using GradingSystemApi.Migrations;
 
 public class Startup
 {
@@ -19,14 +21,19 @@ public class Startup
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
-        // Configure DbContext with SQL Server
+        // Configure DbContext with SQlite
         services.AddDbContext<GradingSystemContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
 
         // Add controllers and enable JSON serialization
         services.AddControllers().AddJsonOptions(options =>
         {
             options.JsonSerializerOptions.PropertyNamingPolicy = null; // Keep property names as-is
+        });
+
+        services.AddSwaggerGen(c =>
+        {
+            c.SwaggerDoc("v1", new OpenApiInfo { Title = "GradingSystemApi", Version = "v1" });
         });
 
         // Enable CORS (Cross-Origin Resource Sharing)
@@ -55,6 +62,22 @@ public class Startup
             app.UseHsts();
         }
 
+        // Create a scope and resolve the GradingSystemContext from the service provider
+        using (var scope = app.ApplicationServices.CreateScope())
+        {
+            var dbContext = scope.ServiceProvider.GetRequiredService<GradingSystemContext>();
+
+            // Initialize data using DataLoader
+            DataLoader.Initialize(dbContext);
+        }
+
+        app.UseSwagger();
+        app.UseSwaggerUI(c =>
+        {
+            c.SwaggerEndpoint("/swagger/v1/swagger.json", "GradingSystem V1");
+            c.RoutePrefix = "swagger";
+        });
+
         // Enable CORS
         app.UseCors("CorsPolicy");
 
@@ -77,4 +100,5 @@ public class Startup
             endpoints.MapControllers();
         });
     }
+
 }

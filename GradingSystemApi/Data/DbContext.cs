@@ -10,9 +10,16 @@ namespace GradingSystem.data
         public DbSet<Student> Students { get; set; }
         public DbSet<Grade> Grades { get; set; }
 
+        public GradingSystemContext(DbContextOptions<GradingSystemContext> options) : base(options)
+        {
+        }
+
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Data Source=gradingSystem.db");
+            optionsBuilder.UseSqlite("Data Source=gradingSystem.db")
+            .LogTo(Console.WriteLine, LogLevel.Information);
+
         }
     }
 }

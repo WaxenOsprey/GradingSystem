@@ -13,7 +13,7 @@ namespace GradingSystem.models
         // Foreign key
         public int CohortId { get; set; }
         // Navigation property
-        public Cohort Cohort { get; set; }
+        public Cohort? Cohort { get; set; }
 
         public Student(string name)
         {

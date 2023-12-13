@@ -2,10 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using GradingSystem.data;
 using GradingSystem.models;
-using System.Collections.Generic;
-using System.Linq;
 
-[Route("api/[cohorts]")]
+[Route("api/cohorts")]
 [ApiController]
 public class CohortController : ControllerBase
 {
