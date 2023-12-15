@@ -28,13 +28,35 @@ public class StudentController : ControllerBase
         return student != null ? Ok(student) : NotFound();
     }
 
-    [HttpPost]
-    public ActionResult<Student> Post([FromBody] Student student)
+    [HttpGet("byCohort/{cohortId}")]
+    public ActionResult<IEnumerable<Student>> GetByCohort(int cohortId)
     {
-        _context.Students.Add(student);
-        _context.SaveChanges();
-        return Ok(student);
+        var studentsInCohort = _context.Students
+                                    .Where(student => student.CohortId == cohortId)
+                                    .ToList();
+
+        return Ok(studentsInCohort);
     }
+
+
+[HttpPost]
+public ActionResult<Student> Post([FromBody] Student student, [FromQuery] int cohortId)
+{
+    Console.WriteLine($"Cohort ID from query: {cohortId}");
+    var cohort = _context.Cohorts.Find(cohortId);
+
+    if (cohort == null) return NotFound("Cohort not found");
+
+    student.CohortId = cohortId;
+    
+    cohort.students.Add(student);
+
+    _context.Students.Add(student);
+    _context.SaveChanges();
+
+    return Ok(student);
+}
+
 
     [HttpPut("{id}")]
     public ActionResult<Student> Put(int id, [FromBody] Student student)

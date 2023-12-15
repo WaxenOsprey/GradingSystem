@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 using GradingSystem.utils;
 
 namespace GradingSystem.models
@@ -13,6 +14,8 @@ namespace GradingSystem.models
         // Foreign key
         public int CohortId { get; set; }
         // Navigation property
+
+        [JsonIgnore] 
         public Cohort? Cohort { get; set; }
 
         public Student(string name)
