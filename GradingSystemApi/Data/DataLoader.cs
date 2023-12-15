@@ -8,11 +8,11 @@ public static class DataLoader
     public static void Initialize(GradingSystemContext context)
     {
         // Check if the database has been seeded
-        if (context.Cohorts.Any() || context.Students.Any() || context.Grades.Any())
-        {
-            Console.WriteLine("Data already exists. Skipping seed.");
-            return;
-        }
+        // if (context.Cohorts.Any() || context.Students.Any() || context.Grades.Any())
+        // {
+        //     Console.WriteLine("Data already exists. Skipping seed.");
+        //     return;
+        // }
 
         SeedData(context);
     }
@@ -22,6 +22,7 @@ public static class DataLoader
         // Add sample data here
         var cohort = new Cohort("Cohort 1");
         var cohort2 = new Cohort("Cohort 2");
+        
 
 
 

@@ -23,7 +23,7 @@ public class CohortController : ControllerBase
         var cohort = _context.Cohorts.Find(id);
         return cohort != null ? Ok(cohort) : NotFound();
     }
-
+    
     [HttpPost]
     public ActionResult<Cohort> Post([FromBody] Cohort cohort)
     {
@@ -32,15 +32,27 @@ public class CohortController : ControllerBase
         return Ok(cohort);
     }
 
-    [HttpPut("{id}")]
-    public ActionResult<Cohort> Put(int id, [FromBody] Cohort cohort)
+[HttpPut("{id}")]
+public ActionResult<Cohort> Put(int id, [FromBody] Cohort updatedCohort)
+{
+    if (id != updatedCohort.cohortId)
     {
-        if (id != cohort.cohortId) return BadRequest();
-
-        _context.Entry(cohort).State = EntityState.Modified;
-        _context.SaveChanges();
-        return Ok(cohort);
+        return BadRequest("ID in the route does not match the ID in the request body");
     }
+
+    var existingCohort = _context.Cohorts.Find(id);
+    if (existingCohort == null)
+    {
+        return NotFound();
+    }
+
+    existingCohort.name = updatedCohort.name;
+    _context.Entry(existingCohort).State = EntityState.Modified;
+    _context.SaveChanges();
+
+    return Ok(existingCohort);
+}
+
 
     [HttpDelete("{id}")]
     public ActionResult<Cohort> Delete(int id)
