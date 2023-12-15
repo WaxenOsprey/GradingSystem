@@ -39,33 +39,48 @@ public class StudentController : ControllerBase
     }
 
 
-[HttpPost]
-public ActionResult<Student> Post([FromBody] Student student, [FromQuery] int cohortId)
-{
-    Console.WriteLine($"Cohort ID from query: {cohortId}");
-    var cohort = _context.Cohorts.Find(cohortId);
+    [HttpPost]
+    public ActionResult<Student> Post([FromBody] Student student, [FromQuery] int cohortId)
+    {
+        Console.WriteLine($"Cohort ID from query: {cohortId}");
+        var cohort = _context.Cohorts.Find(cohortId);
 
-    if (cohort == null) return NotFound("Cohort not found");
+        if (cohort == null) return NotFound("Cohort not found");
 
-    student.CohortId = cohortId;
-    
-    cohort.students.Add(student);
+        student.CohortId = cohortId;
+        
+        cohort.students.Add(student);
 
-    _context.Students.Add(student);
-    _context.SaveChanges();
+        _context.Students.Add(student);
+        _context.SaveChanges();
 
-    return Ok(student);
-}
+        return Ok(student);
+    }
 
 
     [HttpPut("{id}")]
-    public ActionResult<Student> Put(int id, [FromBody] Student student)
+    public ActionResult<Student> Put(int id, [FromBody] Student updatedStudent)
     {
-        if (id != student.studentId) return BadRequest();
+        if (id != updatedStudent.studentId)
+        {
+            return BadRequest("ID in the route does not match the ID in the request body");
+        }
 
-        _context.Entry(student).State = EntityState.Modified;
+        var existingStudent = _context.Students.Include(s => s.Cohort).FirstOrDefault(s => s.studentId == id);
+
+        if (existingStudent == null)
+        {
+            return NotFound();
+        }
+
+        existingStudent.name = updatedStudent.name;
+
+        existingStudent.CohortId = updatedStudent.CohortId;
+
+        _context.Entry(existingStudent).State = EntityState.Modified;
         _context.SaveChanges();
-        return Ok(student);
+
+        return Ok(existingStudent);
     }
 
     [HttpDelete("{id}")]

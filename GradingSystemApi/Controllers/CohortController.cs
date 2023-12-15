@@ -15,7 +15,17 @@ public class CohortController : ControllerBase
     }
 
     [HttpGet]
-    public ActionResult<IEnumerable<Cohort>> Get() => Ok(_context.Cohorts.ToList());
+    public ActionResult<IEnumerable<Cohort>> Get()
+    {
+        var cohortsWithStudentsAndGrades = _context.Cohorts
+            .Include(c => c.students)
+                .ThenInclude(s => s.grades)  // Include the grades of each student
+            .ToList();
+
+        return Ok(cohortsWithStudentsAndGrades);
+    }
+
+
 
     [HttpGet("{id}")]
     public ActionResult<Cohort> Get(int id)

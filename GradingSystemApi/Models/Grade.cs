@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 using GradingSystem.utils;
 
 namespace GradingSystem.models
@@ -13,6 +14,7 @@ namespace GradingSystem.models
         // Foreign key
         public int StudentId { get; set; }
         // Navigation property
+        [JsonIgnore]
         public Student? Student { get; set; }
 
 

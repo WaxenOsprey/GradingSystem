@@ -18,9 +18,10 @@ namespace GradingSystem.models
         [JsonIgnore] 
         public Cohort? Cohort { get; set; }
 
-        public Student(string name)
+        public Student(string name, int CohortId)
         {
             this.name = name;
+            this.CohortId = CohortId;
             this.grades = new List<Grade>();
         }
 
