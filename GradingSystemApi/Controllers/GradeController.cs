@@ -27,6 +27,17 @@ public class GradeController : ControllerBase
         return grade != null ? Ok(grade) : NotFound();
     }
 
+    [HttpGet("byStudent/{studentId}")]
+    public ActionResult<IEnumerable<Grade>> GetByStudent(int studentId)
+    {
+        var gradesForStudent = _context.Grades
+                                    .Where(grade => grade.StudentId == studentId)
+                                    .ToList();
+    
+        return Ok(gradesForStudent);
+    }
+
+
     [HttpPost]
     public ActionResult<Grade> Post([FromBody] Grade grade, [FromQuery] int studentId)
     {
@@ -36,7 +47,7 @@ public class GradeController : ControllerBase
 
         grade.StudentId = studentId;
 
-        student.grades.Add(grade); // Assuming the Grades property in Student is a collection
+        student.grades.Add(grade); 
 
         _context.Grades.Add(grade);
         _context.SaveChanges();
