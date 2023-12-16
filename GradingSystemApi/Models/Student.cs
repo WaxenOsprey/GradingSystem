@@ -9,6 +9,8 @@ namespace GradingSystem.models
         [Key]
         public int studentId { get; set; }
         public string name { get; set; }
+
+        public string average { get; set; }
         public List<Grade> grades { get; set; }
 
         // Foreign key
@@ -23,6 +25,8 @@ namespace GradingSystem.models
             this.name = name;
             this.CohortId = CohortId;
             this.grades = new List<Grade>();
+            this.average = Grader.GradeAverage(grades);
+
         }
 
         public string GetAverage()

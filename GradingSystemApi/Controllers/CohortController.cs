@@ -14,7 +14,7 @@ public class CohortController : ControllerBase
         _context = context;
     }
 
-    [HttpGet]
+    [HttpGet] 
     public ActionResult<IEnumerable<Cohort>> Get()
     {
         var cohortsWithStudentsAndGrades = _context.Cohorts
@@ -27,14 +27,14 @@ public class CohortController : ControllerBase
 
 
 
-    [HttpGet("{id}")]
+    [HttpGet("{id}")] 
     public ActionResult<Cohort> Get(int id)
     {
         var cohort = _context.Cohorts.Find(id);
         return cohort != null ? Ok(cohort) : NotFound();
     }
     
-    [HttpPost]
+    [HttpPost] 
     public ActionResult<Cohort> Post([FromBody] Cohort cohort)
     {
         _context.Cohorts.Add(cohort);
@@ -42,29 +42,29 @@ public class CohortController : ControllerBase
         return Ok(cohort);
     }
 
-[HttpPut("{id}")]
-public ActionResult<Cohort> Put(int id, [FromBody] Cohort updatedCohort)
-{
-    if (id != updatedCohort.cohortId)
+    [HttpPut("{id}")] 
+    public ActionResult<Cohort> Put(int id, [FromBody] Cohort updatedCohort)
     {
-        return BadRequest("ID in the route does not match the ID in the request body");
+        if (id != updatedCohort.cohortId)
+        {
+            return BadRequest("ID in the route does not match the ID in the request body");
+        }
+
+        var existingCohort = _context.Cohorts.Find(id);
+        if (existingCohort == null)
+        {
+            return NotFound();
+        }
+
+        existingCohort.name = updatedCohort.name;
+        _context.Entry(existingCohort).State = EntityState.Modified;
+        _context.SaveChanges();
+
+        return Ok(existingCohort);
     }
 
-    var existingCohort = _context.Cohorts.Find(id);
-    if (existingCohort == null)
-    {
-        return NotFound();
-    }
 
-    existingCohort.name = updatedCohort.name;
-    _context.Entry(existingCohort).State = EntityState.Modified;
-    _context.SaveChanges();
-
-    return Ok(existingCohort);
-}
-
-
-    [HttpDelete("{id}")]
+    [HttpDelete("{id}")] 
     public ActionResult<Cohort> Delete(int id)
     {
         var cohort = _context.Cohorts.Find(id);

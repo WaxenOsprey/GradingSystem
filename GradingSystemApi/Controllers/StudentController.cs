@@ -15,11 +15,11 @@ public class StudentController : ControllerBase
     {
         _context = context;
     }
-    // GET: api/students
+
     [HttpGet]
     public ActionResult<IEnumerable<Student>> Get() => Ok(_context.Students.Include(s => s.Cohort).ToList());
 
-    // GET: api/students/{id}
+ 
     [HttpGet("{id}")]
     public ActionResult<Student> Get(int id)
     {
@@ -28,7 +28,7 @@ public class StudentController : ControllerBase
         return student != null ? Ok(student) : NotFound();
     }
 
-    [HttpGet("byCohort/{cohortId}")]
+    [HttpGet("byCohort/{cohortId}")] 
     public ActionResult<IEnumerable<Student>> GetByCohort(int cohortId)
     {
         var studentsInCohort = _context.Students
@@ -39,7 +39,7 @@ public class StudentController : ControllerBase
     }
 
 
-    [HttpPost]
+    [HttpPost] 
     public ActionResult<Student> Post([FromBody] Student student, [FromQuery] int cohortId)
     {
         Console.WriteLine($"Cohort ID from query: {cohortId}");
@@ -83,7 +83,7 @@ public class StudentController : ControllerBase
         return Ok(existingStudent);
     }
 
-    [HttpDelete("{id}")]
+    [HttpDelete("{id}")] 
     public ActionResult<Student> Delete(int id)
     {
         var student = _context.Students.Find(id);
