@@ -33,7 +33,7 @@ namespace GradingSystem.utils
             }
         }
 
-        public static string GradeAverage(List<Grade> grades)
+        public static double GradeAverage(List<Grade> grades)
         {
             int sum = 0;
 
@@ -44,9 +44,27 @@ namespace GradingSystem.utils
 
             double result = (double)sum / grades.Count;
 
-            string finalGrade = GradeExam((int)result);
-
-            return $"Average score is {result:F2} and grade is {finalGrade}";
+            return result;
         }
+
+        public static double CohortAverage(List<Student> students)
+        {
+            int sum = 0;
+            int count = 0;
+
+            foreach (Student student in students)
+            {
+                foreach (Grade grade in student.grades)
+                {
+                    sum += grade.numberGrade;
+                    count++;
+                }
+            }
+
+            double result = (double)sum / count;
+
+            return result;
+        }
+
     }
 }

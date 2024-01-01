@@ -21,13 +21,6 @@ namespace GradingSystem.models
         public Grade(int numberGrade)
         {
             this.numberGrade = numberGrade;
-            this.letterGrade = Grader.GradeExam(numberGrade);
         }
-
-        public String GetGrade()
-        {
-            return $"Your grade is {letterGrade}";
-        }
-
     }
 }

@@ -1,5 +1,8 @@
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using GradingSystem.models;
 using GradingSystem.utils;
 
 namespace GradingSystem.models
@@ -10,28 +13,19 @@ namespace GradingSystem.models
         public int studentId { get; set; }
         public string name { get; set; }
 
-        public string average { get; set; }
-        public List<Grade> grades { get; set; }
+        public List<Grade> grades { get; set; } = new List<Grade>();
 
-        // Foreign key
         public int CohortId { get; set; }
-        // Navigation property
-
-        [JsonIgnore] 
+        [JsonIgnore]
         public Cohort? Cohort { get; set; }
 
         public Student(string name, int CohortId)
         {
             this.name = name;
             this.CohortId = CohortId;
-            this.grades = new List<Grade>();
-            this.average = Grader.GradeAverage(grades);
-
         }
 
-        public string GetAverage()
-        {
-            return Grader.GradeAverage(grades);
-        }
+
+
     }
 }

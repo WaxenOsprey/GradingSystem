@@ -10,11 +10,19 @@ function App() {
   const [selectedCohort, setSelectedCohort] = useState(null);
 
   const fetchData = async () => {
-    const response = await fetch('http://localhost:5122/api/cohorts');
-    const data = await response.json();
-    setData(data);
-    console.log(data);
-  }
+    try {
+      const response = await fetch('http://localhost:5122/api/cohorts');
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      const data = await response.json();
+      setData(data);
+      console.log(data);
+    } catch (error) {
+      console.error('Error fetching data:', error.message);
+    }
+  };
+  
 
   const handleSelectChange = (event) => {
     const selectedValue = event.target.value;
@@ -30,9 +38,9 @@ function App() {
 
   return (
     <MainWindow>
-      <h1>GradingSystem (NO MORE CODING UNTIL LEARN ABOUT CODE AND INHERITANCE ETC.)</h1>
+      <h1>GradingSystem</h1>
               <select onChange={handleSelectChange} value={selectedCohort}>
-                <option value="" disabled>Select a Cohort</option>
+                <option value="" disabled>Happy Birthday Anna-Louise!</option>
                   {data && data.map((item) => (
                     <option key={item.cohortId} value={item.cohortId}>
                       {item.name}
@@ -41,7 +49,7 @@ function App() {
               </select>
         {selectedCohort && <p>Selected Cohort: {selectedCohort}</p>}
 
-        <CohortOverview selectedCohort={selectedCohort}/>
+        {/* <CohortOverview selectedCohort={selectedCohort}/> */}
 
 
 

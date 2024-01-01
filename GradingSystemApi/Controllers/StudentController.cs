@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using GradingSystem.data;
 using GradingSystem.models;
+using GradingSystem.utils;
+
 using System.Collections.Generic;
 using System.Linq;
 
@@ -36,6 +38,16 @@ public class StudentController : ControllerBase
                                     .ToList();
 
         return Ok(studentsInCohort);
+    }
+
+    [HttpGet("average/{studentId}")]
+    public ActionResult<double> GetAverage(int studentId)
+    {
+        var student = _context.Students.Include(s => s.grades).FirstOrDefault(s => s.studentId == studentId);
+
+        if (student == null) return NotFound("Student not found");
+
+        return Ok(Grader.GradeAverage(student.grades));
     }
 
 

@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using GradingSystem.data;
 using GradingSystem.models;
+using GradingSystem.utils;
 
 [Route("api/cohorts")]
 [ApiController]
@@ -32,6 +33,19 @@ public class CohortController : ControllerBase
     {
         var cohort = _context.Cohorts.Find(id);
         return cohort != null ? Ok(cohort) : NotFound();
+    }
+
+    [HttpGet("average/{id}")]
+    public ActionResult<double> GetAverage(int id)
+    {
+        var cohort = _context.Cohorts
+            .Include(c => c.students)
+                .ThenInclude(s => s.grades)  // Include the grades of each student
+            .FirstOrDefault(c => c.cohortId == id);
+
+        if (cohort == null) return NotFound("Cohort not found");
+
+        return Ok(Grader.CohortAverage(cohort.students));
     }
     
     [HttpPost] 
