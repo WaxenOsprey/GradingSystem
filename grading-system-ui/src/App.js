@@ -1,13 +1,16 @@
-import logo from './logo.svg';
 import './App.css';
 import CohortOverview from './components/CohortOverview';
 import styled from 'styled-components';
 import { useState , useEffect} from 'react';
+import Student from './components/Student';
+import StudentOverview from './components/StudentOverview';
+import GradesOverview from './components/GradesOverview';
 
 function App() {
 
   const [data, setData] = useState(null);
   const [selectedCohort, setSelectedCohort] = useState(null);
+  const [selectedStudent, setSelectedStudent] = useState(null);
 
   const fetchData = async () => {
     try {
@@ -37,38 +40,31 @@ function App() {
 
 
   return (
-    <MainWindow>
-      <h1>GradingSystem</h1>
-              <select onChange={handleSelectChange} value={selectedCohort}>
-                <option value="" disabled>Happy Birthday Anna-Louise!</option>
-                  {data && data.map((item) => (
-                    <option key={item.cohortId} value={item.cohortId}>
-                      {item.name}
-                    </option>
-                ))}
-              </select>
-        {selectedCohort && <p>Selected Cohort: {selectedCohort}</p>}
+    <>
+      <MainWindow>
+        <h1>GradingSystem</h1>
+                <select onChange={handleSelectChange} value={selectedCohort}>
+                  <option value="" disabled></option>
+                    {data && data.map((item) => (
+                      <option key={item.cohortId} value={item.cohortId}>
+                        {item.name}
+                      </option>
+                  ))}
+                </select>
+          {selectedCohort && <p>Selected Cohort: {selectedCohort}</p>}
+          {selectedStudent && <p>Selected Student: {selectedStudent.name}</p>}
 
-        {/* <CohortOverview selectedCohort={selectedCohort}/> */}
-
-
-
-    </MainWindow>
+          {/* <CohortOverview selectedCohort={selectedCohort}/> */}
+      </MainWindow>
+      <SecondRankContainer>
+        <CohortOverview selectedCohort={selectedCohort} setSelectedStudent={setSelectedStudent}/>
+        <StudentOverview selectedStudent={selectedStudent}/>
+      </SecondRankContainer>
+      <GradesOverview selectedStudent={selectedStudent}/>
+    </>
   );
 
 }
-
-// const CohortOverview = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   justify-content: center;
-//   border: solid 1px black;
-//   border-radius: 5px;
-//   width: 50%;
-//   margin: 10px;
-//   padding: 10px;
-// `
 
 
 const MainWindow = styled.div`
@@ -77,6 +73,12 @@ const MainWindow = styled.div`
   align-items: center;
   justify-content: center;
   border: solid 5px red;
+`
+
+const SecondRankContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 `
 
 export default App;
