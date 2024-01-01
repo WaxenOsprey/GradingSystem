@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
+import GradesOverview from "./GradesOverview";
 
-const StudentOverview = ({ selectedStudent, setRefresh }) => {
+const StudentOverview = ({ selectedStudent, setRefresh, refresh }) => {
   const [newGrade, setNewGrade] = useState(0);
 
   const handleInputChange = (e) => {
@@ -41,22 +42,26 @@ const StudentOverview = ({ selectedStudent, setRefresh }) => {
 
   return (
     <>
-      <StudentOverviewContainer>
-        {selectedStudent ? (
-          <>
-            <h1>{selectedStudent.name}</h1>
-            <p>Student ID: {selectedStudent.studentId}</p>
-            <p>Cohort ID: {selectedStudent.CohortId}</p>
-            <GradeForm
-              newGrade={newGrade}
-              handleInputChange={handleInputChange}
-              handleAddGrade={handleAddGrade}
-            />
-          </>
-        ) : (
-          <p>No student selected</p>
-        )}
-      </StudentOverviewContainer>
+        <SecondRank>
+            <StudentOverviewContainer>
+                {selectedStudent ? (
+                <>
+                    <h1>{selectedStudent.name}</h1>
+                    <p>Student ID: {selectedStudent.studentId}</p>
+                    <p>Cohort ID: {selectedStudent.CohortId}</p>
+                    <GradeForm
+                    newGrade={newGrade}
+                    handleInputChange={handleInputChange}
+                    handleAddGrade={handleAddGrade}
+                    />
+                </>
+                ) : (
+                <p>No student selected</p>
+                )}
+            </StudentOverviewContainer>
+            <GradesOverview selectedStudent={selectedStudent} refresh={refresh} />
+        </SecondRank>
+
     </>
   );
 };
@@ -64,12 +69,18 @@ const StudentOverview = ({ selectedStudent, setRefresh }) => {
 const StudentOverviewContainer = styled.div`
   display: flex;
   flex-direction: column;
-  border: 1px solid blue;
   margin: 10px;
   padding: 10px;
-  width: 50%;
+  width: 100%;
   align-items: center;
   justify-content: center;
+`;
+
+const SecondRank = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 `;
 
 const GradeForm = ({ newGrade, handleInputChange, handleAddGrade }) => {

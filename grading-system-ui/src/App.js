@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import StudentOverview from './components/StudentOverview';
 import GradesOverview from './components/GradesOverview';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUsers } from '@fortawesome/free-solid-svg-icons';
 
 function App() {
   const [data, setData] = useState(null);
@@ -25,10 +27,6 @@ function App() {
     }
   };
 
-  const handleSelectChange = (event) => {
-    const selectedValue = event.target.value;
-    setSelectedCohort(selectedValue);
-  };
 
   const handleNewCohortSubmit = async (event) => {
     event.preventDefault();
@@ -61,23 +59,19 @@ function App() {
 
   useEffect(() => {
     console.log('refreshing data' + refresh);
-  } , [refresh]);
+  }, [refresh]);
 
   return (
     <>
       <MainWindow>
         <h1>GradingSystem</h1>
-        <select onChange={handleSelectChange} value={selectedCohort}>
-          <option value="" disabled></option>
-          {data &&
-            data.map((item) => (
-              <option key={item.cohortId} value={item.cohortId}>
-                {item.name}
-              </option>
-            ))}
-        </select>
-        {selectedCohort && <p>Selected Cohort: {selectedCohort}</p>}
-        {selectedStudent && <p>Selected Student: {selectedStudent.name}</p>}
+        {data &&
+          data.map((item) => (
+            <CohortItem key={item.cohortId} onClick={() => setSelectedCohort(item.cohortId)}>
+              <StyledIcon icon={faUsers} isSelected={selectedCohort === item.cohortId} />
+              <p>{item.name}</p>
+            </CohortItem>
+          ))}
 
         {/* New Cohort Form */}
         <form onSubmit={handleNewCohortSubmit}>
@@ -94,10 +88,9 @@ function App() {
         </form>
       </MainWindow>
       <SecondRankContainer>
-        <CohortOverview selectedCohort={selectedCohort} setSelectedStudent={setSelectedStudent} />
-        <StudentOverview selectedStudent={selectedStudent} setRefresh={setRefresh} />
+        <CohortOverview selectedCohort={selectedCohort} setSelectedStudent={setSelectedStudent} selectedStudent={selectedStudent} />
       </SecondRankContainer>
-      <GradesOverview selectedStudent={selectedStudent} refresh={refresh} />
+      <StudentOverview selectedStudent={selectedStudent} setRefresh={setRefresh} refresh={refresh} />
     </>
   );
 }
@@ -107,13 +100,31 @@ const MainWindow = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: solid 5px red;
 `;
 
 const SecondRankContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+`;
+
+const CohortItem = styled.div`
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  &:hover {
+    background-color: lightgray;
+  }
+
+  p {
+    margin: 0;
+  }
+`;
+
+const StyledIcon = styled(FontAwesomeIcon)`
+  color: ${(props) => (props.isSelected ? 'blue' : 'green')};
+  margin-right: 10px;
 `;
 
 export default App;

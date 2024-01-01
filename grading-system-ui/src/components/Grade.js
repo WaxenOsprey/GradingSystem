@@ -4,7 +4,7 @@ import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
 const GradeDisplay = ({ grade }) => {
-  const [displayMode, setDisplayMode] = useState("letter");
+  const [displayMode, setDisplayMode] = useState("number");
 
   const toggleDisplayMode = () => {
     setDisplayMode((prevMode) => (prevMode === "number" ? "letter" : "number"));
@@ -49,16 +49,14 @@ const GradeDisplay = ({ grade }) => {
 
 const GradeContainer = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  align-items: start; 
   margin: 10px;
   padding: 10px;
   cursor: pointer;
 `;
 
 const CircularProgressBarContainer = styled.div`
-  width: 100px;
-  height: 100px;
+    width: 50px;
 `;
 
 export default GradeDisplay;

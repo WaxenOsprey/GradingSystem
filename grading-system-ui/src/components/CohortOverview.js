@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from 'styled-components';
 import Student from './Student';
 
-const CohortOverview = ({ selectedCohort, setSelectedStudent }) => {
+const CohortOverview = ({ selectedCohort, setSelectedStudent, selectedStudent }) => {
   const [cohort, setCohort] = useState(null);
   const [newStudentName, setNewStudentName] = useState('');
 
@@ -80,9 +80,11 @@ const CohortOverview = ({ selectedCohort, setSelectedStudent }) => {
                   </label>
                   <button type="submit">Add Student</button>
                 </form>
-                {cohort.students.map((item) => (
-                  <Student key={item.studentId} student={item} onClick={handleStudentClick}/>
-                ))}
+                <StudentList>
+                  {cohort.students.map((item) => (
+                    <Student key={item.studentId} student={item} onClick={handleStudentClick} selectedStudent={selectedStudent}/>
+                  ))}
+                </StudentList>
               </>
             ) : (
               <p>No students data available</p>
@@ -99,12 +101,19 @@ const CohortOverview = ({ selectedCohort, setSelectedStudent }) => {
 const CohortOverviewContainer = styled.div`
   display: flex;
   flex-direction: column;
-  border: 1px solid green;
   margin: 10px;
   padding: 10px;
   width: 50%;
   align-items: center;
   justify-content: center;
+`;
+
+const StudentList = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  list-style-type: none;
+  padding: 0;
 `;
 
 export default CohortOverview;

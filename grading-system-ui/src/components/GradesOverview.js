@@ -49,7 +49,6 @@ const GradesOverview = ({ selectedStudent, refresh }) => {
     const GradesOverviewContainer = styled.div`
         display: flex;
         flex-direction: column;
-        border: 1px solid purple;
         margin: 10px;
         padding: 10px;
         width: 100%;
@@ -61,8 +60,8 @@ const GradesOverview = ({ selectedStudent, refresh }) => {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
+        /* justify-content: flex-start; */
+        /* align-items: center; */
         list-style-type: none;
         padding: 0;
     `;
