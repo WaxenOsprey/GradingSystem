@@ -1,13 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
 
 const GradeDisplay = ({ grade }) => {
+  const [displayMode, setDisplayMode] = useState("letter");
+
+  const toggleDisplayMode = () => {
+    setDisplayMode((prevMode) => (prevMode === "number" ? "letter" : "number"));
+  };
+
+  const getTextValue = () => {
+    return displayMode === "number" ? `${grade.numberGrade}%` : grade.letterGrade;
+  };
+
   const getColor = (letterGrade) => {
     switch (letterGrade) {
       case 'A':
-        return 'green';
-      case 'B':
         return 'blue';
+      case 'B':
+        return 'green';
       case 'C':
         return 'yellow';
       case 'D':
@@ -20,12 +32,17 @@ const GradeDisplay = ({ grade }) => {
   };
 
   return (
-    <GradeContainer>
-      <GradeInfo>
-        <p>{grade.numberGrade}%</p>
-        <p><span style={{ color: getColor(grade.letterGrade) }}>{grade.letterGrade}</span></p>
-      </GradeInfo>
-      <PercentageBar style={{ width: `${grade.numberGrade}%`, backgroundColor: getColor(grade.letterGrade) }}></PercentageBar>
+    <GradeContainer onClick={toggleDisplayMode}>
+      <CircularProgressBarContainer>
+        <CircularProgressbar
+          value={grade.numberGrade}
+          text={getTextValue()}
+          styles={buildStyles({
+            textColor: getColor(grade.letterGrade),
+            pathColor: getColor(grade.letterGrade),
+          })}
+        />
+      </CircularProgressBarContainer>
     </GradeContainer>
   );
 };
@@ -33,30 +50,15 @@ const GradeDisplay = ({ grade }) => {
 const GradeContainer = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: start;
-  border: 1px solid black;
+  align-items: center;
   margin: 10px;
-  padding: 10px; 
-  width: 500px;
+  padding: 10px;
+  cursor: pointer;
 `;
 
-const PercentageBar = styled.div`
-  height: 20px;
-  border-radius: 5px;
-  margin-bottom: 10px;
-
-`;
-
-const GradeInfo = styled.div`
-  text-align: center;
-
-  p {
-    margin: 0;
-  }
-
-  span {
-    font-weight: bold;
-  }
+const CircularProgressBarContainer = styled.div`
+  width: 100px;
+  height: 100px;
 `;
 
 export default GradeDisplay;

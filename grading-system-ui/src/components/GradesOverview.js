@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Grade from "./Grade";
 
-const GradesOverview = ({ selectedStudent }) => {
+const GradesOverview = ({ selectedStudent, refresh }) => {
     const [student, setStudent] = useState(null);
   
     const fetchStudentGrades = async () => {
@@ -23,7 +23,8 @@ const GradesOverview = ({ selectedStudent }) => {
   
     useEffect(() => {
       fetchStudentGrades();
-    }, [selectedStudent]);
+      console.log("fetching student grades")
+    }, [selectedStudent, refresh]);
   
     return (
       <>
@@ -31,11 +32,11 @@ const GradesOverview = ({ selectedStudent }) => {
   
           <h2>Grades:</h2>
           {student && student.grades && student.grades.length > 0 ? (
-            <ul>
+            <GradeList>
               {student.grades.map((grade) => (
                 <Grade key={grade.gradeId} grade={grade}></Grade>
               ))}
-            </ul>
+            </GradeList>
           ) : (
             <p>No grades available</p>
           )}
@@ -55,5 +56,16 @@ const GradesOverview = ({ selectedStudent }) => {
         align-items: center;
         justify-content: center;
     `;
+
+    const GradeList = styled.div`
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        list-style-type: none;
+        padding: 0;
+    `;
+
 
 export default GradesOverview;

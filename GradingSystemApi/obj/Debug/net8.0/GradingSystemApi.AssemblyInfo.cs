@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GradingSystemApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1069dd272bc21372defab764cc1ae1ce9fccbad1")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3b2ae039ebeef889c2d326e6cacd164243e83238")]
 [assembly: System.Reflection.AssemblyProductAttribute("GradingSystemApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GradingSystemApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

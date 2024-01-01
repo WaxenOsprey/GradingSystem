@@ -4,6 +4,7 @@ using GradingSystem.data;
 using GradingSystem.models;
 using System.Collections.Generic;
 using System.Linq;
+using GradingSystem.utils;
 
 [Route("api/grades")]
 [ApiController]
@@ -46,6 +47,7 @@ public class GradeController : ControllerBase
         if (student == null) return NotFound("Student not found");
 
         grade.StudentId = studentId;
+        grade.letterGrade = Grader.GradeExam(grade.numberGrade);
 
         student.grades.Add(grade); 
 

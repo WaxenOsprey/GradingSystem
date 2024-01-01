@@ -4,6 +4,7 @@ import Student from './Student';
 
 const CohortOverview = ({ selectedCohort, setSelectedStudent }) => {
   const [cohort, setCohort] = useState(null);
+  const [newStudentName, setNewStudentName] = useState('');
 
   const fetchCohort = async () => {
     try {
@@ -27,6 +28,34 @@ const CohortOverview = ({ selectedCohort, setSelectedStudent }) => {
     setSelectedStudent(selectedStudent);
   };
 
+  const handleNewStudentSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      const response = await fetch(`http://localhost:5122/api/students/?cohortId=${selectedCohort}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: newStudentName,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      // Refresh the cohort data after adding a new student
+      fetchCohort();
+
+      // Clear the input field
+      setNewStudentName('');
+    } catch (error) {
+      console.error('Error adding new student:', error.message);
+    }
+  };
+
   useEffect(() => {
     fetchCohort();
   }, [selectedCohort]);
@@ -38,9 +67,23 @@ const CohortOverview = ({ selectedCohort, setSelectedStudent }) => {
           <h1>Students in {cohort && cohort.name}</h1>
           <div>
             {Array.isArray(cohort.students) ? (
-              cohort.students.map((item) => (
-                <Student key={item.studentId} student={item} onClick={handleStudentClick}/>
-              ))
+              <>
+                <form onSubmit={handleNewStudentSubmit}>
+                  <label>
+                    New Student Name:
+                    <input
+                      type="text"
+                      value={newStudentName}
+                      onChange={(e) => setNewStudentName(e.target.value)}
+                      required
+                    />
+                  </label>
+                  <button type="submit">Add Student</button>
+                </form>
+                {cohort.students.map((item) => (
+                  <Student key={item.studentId} student={item} onClick={handleStudentClick}/>
+                ))}
+              </>
             ) : (
               <p>No students data available</p>
             )}
