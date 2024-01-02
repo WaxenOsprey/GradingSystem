@@ -10,11 +10,21 @@ const Student = ({student, onClick, selectedStudent}) => {
     }
     return (
         <>
-        <StyledIcon icon={faUser} onClick={handleClick} isSelected={selectedStudent === student} />
-        <p>{student.name}</p>
+        <StudentContainer>
+            <StyledIcon icon={faUser} onClick={handleClick} isSelected={selectedStudent === student} />
+            <p>{student.name}</p>
+
+        </StudentContainer>
       </>
      );
 }
+
+const StudentContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+`;
 
 const StyledIcon = styled(FontAwesomeIcon)`
     color: ${props => props.isSelected ? "blue" : "green"};

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 import GradesOverview from "./GradesOverview";
+import StudentAverage from "./StudentAverage";
 
 const StudentOverview = ({ selectedStudent, setRefresh, refresh }) => {
   const [newGrade, setNewGrade] = useState(0);
@@ -47,8 +48,7 @@ const StudentOverview = ({ selectedStudent, setRefresh, refresh }) => {
                 {selectedStudent ? (
                 <>
                     <h1>{selectedStudent.name}</h1>
-                    <p>Student ID: {selectedStudent.studentId}</p>
-                    <p>Cohort ID: {selectedStudent.CohortId}</p>
+
                     <GradeForm
                     newGrade={newGrade}
                     handleInputChange={handleInputChange}
@@ -60,6 +60,7 @@ const StudentOverview = ({ selectedStudent, setRefresh, refresh }) => {
                 )}
             </StudentOverviewContainer>
             <GradesOverview selectedStudent={selectedStudent} refresh={refresh} />
+            <StudentAverage selectedStudent={selectedStudent}/>
         </SecondRank>
 
     </>
@@ -87,7 +88,6 @@ const GradeForm = ({ newGrade, handleInputChange, handleAddGrade }) => {
   return (
     <form onSubmit={handleAddGrade}>
       <label>
-        Number Grade:
         <input
           type="number"
           name="numberGrade"

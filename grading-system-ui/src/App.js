@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import StudentOverview from './components/StudentOverview';
 import GradesOverview from './components/GradesOverview';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUsers } from '@fortawesome/free-solid-svg-icons';
+import { faUsers, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 function App() {
   const [data, setData] = useState(null);
@@ -13,6 +13,8 @@ function App() {
   const [selectedStudent, setSelectedStudent] = useState(null);
   const [newCohortName, setNewCohortName] = useState('');
   const [refresh, setRefresh] = useState(false);
+  const [showInput, setShowInput] = useState(false);
+
 
   const fetchData = async () => {
     try {
@@ -63,29 +65,37 @@ function App() {
 
   return (
     <>
-      <MainWindow>
+           <MainWindow>
         <h1>GradingSystem</h1>
-        {data &&
-          data.map((item) => (
-            <CohortItem key={item.cohortId} onClick={() => setSelectedCohort(item.cohortId)}>
-              <StyledIcon icon={faUsers} isSelected={selectedCohort === item.cohortId} />
-              <p>{item.name}</p>
-            </CohortItem>
-          ))}
+        <CohortsContainer>
+          {data &&
+            data.map((item) => (
+              <CohortItem key={item.cohortId} onClick={() => setSelectedCohort(item.cohortId)}>
+                <StyledIcon icon={faUsers} isSelected={selectedCohort === item.cohortId} />
+                <p>{item.name}</p>
+              </CohortItem>
+            ))}
+          {/* Toggle input box */}
+          <CohortItem onClick={() => setShowInput(!showInput)}>
+            <StyledIcon icon={faPlus} isSelected={showInput} />
+            <p>Add Cohort</p>
+          </CohortItem>
+        </CohortsContainer>
 
         {/* New Cohort Form */}
-        <form onSubmit={handleNewCohortSubmit}>
-          <label>
-            New Cohort Name:
-            <input
-              type="text"
-              value={newCohortName}
-              onChange={(e) => setNewCohortName(e.target.value)}
-              required
-            />
-          </label>
-          <button type="submit">Create Cohort</button>
-        </form>
+        {showInput && (
+          <form onSubmit={handleNewCohortSubmit}>
+            <label>
+              <input
+                type="text"
+                value={newCohortName}
+                onChange={(e) => setNewCohortName(e.target.value)}
+                required
+              />
+            </label>
+            <button type="submit">Create Cohort</button>
+          </form>
+        )}
       </MainWindow>
       <SecondRankContainer>
         <CohortOverview selectedCohort={selectedCohort} setSelectedStudent={setSelectedStudent} selectedStudent={selectedStudent} />
@@ -98,6 +108,13 @@ function App() {
 const MainWindow = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+const CohortsContainer = styled.div`
+  display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
 `;
@@ -125,6 +142,9 @@ const CohortItem = styled.div`
 const StyledIcon = styled(FontAwesomeIcon)`
   color: ${(props) => (props.isSelected ? 'blue' : 'green')};
   margin-right: 10px;
+  font-size: 4rem;
+  margin-left: 10px;
+  padding: 10px;
 `;
 
 export default App;

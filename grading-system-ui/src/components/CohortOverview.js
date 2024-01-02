@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import styled from 'styled-components';
 import Student from './Student';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 const CohortOverview = ({ selectedCohort, setSelectedStudent, selectedStudent }) => {
   const [cohort, setCohort] = useState(null);
   const [newStudentName, setNewStudentName] = useState('');
+  const [showInput, setShowInput] = useState(false);
 
   const fetchCohort = async () => {
     try {
@@ -64,27 +67,33 @@ const CohortOverview = ({ selectedCohort, setSelectedStudent, selectedStudent })
     <CohortOverviewContainer>
       {cohort ? (
         <>
-          <h1>Students in {cohort && cohort.name}</h1>
+          <h1>
+            {cohort && cohort.name}
+          </h1>
           <div>
             {Array.isArray(cohort.students) ? (
               <>
-                <form onSubmit={handleNewStudentSubmit}>
-                  <label>
-                    New Student Name:
-                    <input
-                      type="text"
-                      value={newStudentName}
-                      onChange={(e) => setNewStudentName(e.target.value)}
-                      required
-                    />
-                  </label>
-                  <button type="submit">Add Student</button>
-                </form>
                 <StudentList>
                   {cohort.students.map((item) => (
                     <Student key={item.studentId} student={item} onClick={handleStudentClick} selectedStudent={selectedStudent}/>
                   ))}
+                  <AddStudentIcon icon={faPlus} onClick={() => setShowInput(!showInput)} />
+                  <p>Add Student</p>
+
                 </StudentList>
+                {showInput && (
+                  <form onSubmit={handleNewStudentSubmit}>
+                    <label>
+                      <input
+                        type="text"
+                        value={newStudentName}
+                        onChange={(e) => setNewStudentName(e.target.value)}
+                        required
+                      />
+                    </label>
+                    <button type="submit">Add Student</button>
+                  </form>
+                )}
               </>
             ) : (
               <p>No students data available</p>
@@ -114,6 +123,14 @@ const StudentList = styled.div`
   flex-wrap: wrap;
   list-style-type: none;
   padding: 0;
+  align-items: center;
+`;
+
+const AddStudentIcon = styled(FontAwesomeIcon)`
+  cursor: pointer;
+  margin-left: 10px;
+  font-size: 4rem;
+  color: green;
 `;
 
 export default CohortOverview;
